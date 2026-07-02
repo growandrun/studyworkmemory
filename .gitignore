@@ -1,0 +1,10 @@
+node_modules/
+.vercel
+.env
+.env.local
+*.log
+.DS_Store
+# 서비스 계정 키(JSON)는 절대 커밋하지 않기
+*service-account*.json
+key.json
+credentials.json
