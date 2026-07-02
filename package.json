@@ -1,9 +1,0 @@
-{
-  "name": "study-work-tracker",
-  "version": "1.0.0",
-  "description": "공부 & 업무 기록 - 구글 시트 연동 (Vercel + Google Sheets API)",
-  "private": true,
-  "dependencies": {
-    "googleapis": "^140.0.1"
-  }
-}

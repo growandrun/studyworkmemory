@@ -333,7 +333,7 @@
       </div>
       <div>
         <h1>공부 &amp; 업무 기록</h1>
-        <p>기록하면 구글 시트에 자동으로 저장돼요</p>
+        <p>기록하면 이 기기에 자동으로 저장돼요</p>
       </div>
     </header>
 
@@ -487,24 +487,53 @@
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    // ── 서버 호출 래퍼 (Vercel /api/records) ──
-    function apiFetch(method, body) {
-      var opt = { method: method, headers: { 'Content-Type': 'application/json' } };
-      if (body) opt.body = JSON.stringify(body);
-      return fetch('/api/records', opt).then(function (r) {
-        if (!r.ok) return r.text().then(function (t) { throw new Error(t || ('HTTP ' + r.status)); });
-        return r.json();
-      });
+    // ── 저장소 (브라우저 localStorage) ──
+    // 이 기기의 브라우저에 안전하게 저장됩니다. 서버·계정 설정이 필요 없습니다.
+    var LS_KEY = 'sw_records_v1';
+    function lsGet() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (_) { return []; } }
+    function lsSet(a) { localStorage.setItem(LS_KEY, JSON.stringify(a)); }
+    function newest(a) { return a.slice().reverse(); } // 뒤(최신) → 앞
+    function nowStamp() {
+      var d = new Date(), p = function (n) { return n < 10 ? '0' + n : n; };
+      return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
     }
+
     function call(fn, arg1, arg2) {
-      switch (fn) {
-        case 'getRecords':   return apiFetch('GET');
-        case 'addRecord':    return apiFetch('POST', arg1);
-        case 'updateRecord': return apiFetch('PUT', arg1);
-        case 'updateStatus': return apiFetch('PATCH', { id: arg1, status: arg2 });
-        case 'deleteRecord': return apiFetch('DELETE', { id: arg1 });
-        default: return Promise.reject(new Error('unknown call: ' + fn));
-      }
+      return new Promise(function (resolve, reject) {
+        try {
+          var arr = lsGet();
+          if (fn === 'getRecords') { resolve(newest(arr)); return; }
+          if (fn === 'addRecord') {
+            var now = nowStamp();
+            arr.push({
+              id: 'R' + Date.now(),
+              type: arg1.type || '공부', title: arg1.title || '', category: arg1.category || '',
+              date: arg1.date || todayStr(), status: arg1.status || '예정',
+              minutes: arg1.minutes || '', memo: arg1.memo || '', createdAt: now, updatedAt: now
+            });
+            lsSet(arr); resolve(newest(arr)); return;
+          }
+          if (fn === 'updateRecord') {
+            arr = arr.map(function (r) {
+              return r.id === arg1.id ? {
+                id: r.id, type: arg1.type, title: arg1.title, category: arg1.category,
+                date: arg1.date, status: arg1.status, minutes: arg1.minutes, memo: arg1.memo,
+                createdAt: r.createdAt || nowStamp(), updatedAt: nowStamp()
+              } : r;
+            });
+            lsSet(arr); resolve(newest(arr)); return;
+          }
+          if (fn === 'updateStatus') {
+            arr = arr.map(function (r) { return r.id === arg1 ? Object.assign({}, r, { status: arg2, updatedAt: nowStamp() }) : r; });
+            lsSet(arr); resolve(newest(arr)); return;
+          }
+          if (fn === 'deleteRecord') {
+            arr = arr.filter(function (r) { return r.id !== arg1; });
+            lsSet(arr); resolve(newest(arr)); return;
+          }
+          reject(new Error('unknown call: ' + fn));
+        } catch (e) { reject(e); }
+      });
     }
 
     // ── 로드 & 렌더 ──
