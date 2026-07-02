@@ -110,8 +110,11 @@
     .dayhead {
       position: sticky; top: 0; z-index: 6; background: var(--panel);
       border-right: 1px solid var(--col-line); border-bottom: 2px solid var(--line);
-      padding: 9px 7px 7px; cursor: pointer; transition: background .12s;
+      padding: 9px 7px 7px; cursor: grab; transition: background .12s; touch-action: pan-y; user-select: none;
     }
+    .corner { touch-action: pan-y; }
+    .calbody.swiping .dayhead { cursor: grabbing; }
+    .sheet.swiping { transition: none; }
     .dayhead:hover { background: var(--panel-2); }
     .dh-top { display: flex; align-items: center; justify-content: center; gap: 7px; }
     .dh-top .dow { font-size: 12px; font-weight: 800; color: var(--ink-3); }
@@ -375,7 +378,7 @@
         const dowCls = i === 0 ? 'sun' : (i === 6 ? 'sat' : '');
         const chips = (allByDate[ds] || []).map(r => `<div class="ad-ev c-${colorOf(r)} ${r.status === '완료' ? 'done' : ''}" data-id="${r.id}">${esc(r.title || '(제목 없음)')}</div>`).join('');
         h.innerHTML = `<div class="dh-top"><span class="dow ${dowCls}">${WD[i]}</span><span class="dnum">${d.getDate()}</span></div><div class="dh-all">${chips}</div>`;
-        h.addEventListener('click', e => { const chip = e.target.closest('.ad-ev'); if (chip) { e.stopPropagation(); editById(chip.dataset.id); } else openModal({ date: ds, allDay: true }); });
+        h.addEventListener('click', e => { if (window._swiped && Date.now() - window._swiped < 320) return; const chip = e.target.closest('.ad-ev'); if (chip) { e.stopPropagation(); editById(chip.dataset.id); } else openModal({ date: ds, allDay: true }); });
         sheet.appendChild(h);
       });
 
@@ -492,9 +495,51 @@
     };
 
     // ===== 네비 =====
-    $('prevW').onclick = () => { weekStart.setDate(weekStart.getDate() - 7); weekStart = new Date(weekStart); renderAll(); };
-    $('nextW').onclick = () => { weekStart.setDate(weekStart.getDate() + 7); weekStart = new Date(weekStart); renderAll(); };
+    const sheetEl = $('sheet'), calbodyEl = $('calbody');
+    function shiftWeek(delta) { weekStart.setDate(weekStart.getDate() + 7 * delta); weekStart = new Date(weekStart); renderAll(); }
+    $('prevW').onclick = () => shiftWeek(-1);
+    $('nextW').onclick = () => shiftWeek(1);
     $('todayBtn').onclick = () => { weekStart = startOfWeek(new Date()); renderAll(); scrollToHour(new Date().getHours()); };
+
+    // ===== 상단 요일 헤더 좌우 스와이프 → 주 이동 =====
+    let sw = null;
+    function onDown(e) {
+      const h = e.target.closest('.dayhead, .corner'); if (!h) return;
+      sw = { x: e.clientX, y: e.clientY, moved: false };
+    }
+    function onMove(e) {
+      if (!sw) return;
+      const dx = e.clientX - sw.x, dy = e.clientY - sw.y;
+      if (!sw.moved) {
+        if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+        if (Math.abs(dy) > Math.abs(dx)) { sw = null; return; } // 세로 제스처는 스크롤에 양보
+        sw.moved = true; sheetEl.classList.add('swiping'); calbodyEl.classList.add('swiping');
+      }
+      e.preventDefault();
+      sheetEl.style.transform = `translateX(${dx * 0.38}px)`;
+    }
+    function onUp(e) {
+      if (!sw) return;
+      if (sw.moved) {
+        const dx = e.clientX - sw.x;
+        sheetEl.classList.remove('swiping'); calbodyEl.classList.remove('swiping');
+        if (Math.abs(dx) > 55) {
+          window._swiped = Date.now();
+          shiftWeek(dx > 0 ? -1 : 1);          // 오른쪽으로 밀면 이전 주, 왼쪽이면 다음 주
+          sheetEl.style.transition = 'none';
+          sheetEl.style.transform = `translateX(${dx > 0 ? -46 : 46}px)`;
+          requestAnimationFrame(() => { sheetEl.style.transition = 'transform .22s cubic-bezier(.22,1,.36,1)'; sheetEl.style.transform = 'translateX(0)'; });
+        } else {
+          sheetEl.style.transition = 'transform .2s cubic-bezier(.22,1,.36,1)';
+          sheetEl.style.transform = 'translateX(0)';
+        }
+      }
+      sw = null;
+    }
+    calbodyEl.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove, { passive: false });
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', () => { if (sw && sw.moved) { sheetEl.classList.remove('swiping'); calbodyEl.classList.remove('swiping'); sheetEl.style.transition = 'transform .2s ease'; sheetEl.style.transform = 'translateX(0)'; } sw = null; });
 
     const sidebar = $('sidebar'), scrim = $('scrim');
     $('menuBtn').onclick = () => { sidebar.classList.add('open'); scrim.classList.add('on'); };
