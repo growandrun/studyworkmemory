@@ -97,24 +97,21 @@
     /* ===== 통합 캘린더 (단일 스크롤 · sticky 헤더/시간축) ===== */
     .calbody {
       flex: 1; overflow: auto; position: relative;
-      scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
-      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
     }
     .sheet {
       display: grid;
-      grid-template-columns: 60px repeat(7, minmax(148px, 1fr));
+      --gutw: 60px; --colw: 178px;
       grid-template-rows: auto var(--gridh, 1064px);
-      min-width: 1096px; /* 60 + 7*148 */
+      width: max-content;
     }
     .corner { position: sticky; top: 0; left: 0; z-index: 7; background: var(--panel); border-right: 1px solid var(--col-line); border-bottom: 2px solid var(--line); }
     .dayhead {
       position: sticky; top: 0; z-index: 6; background: var(--panel);
       border-right: 1px solid var(--col-line); border-bottom: 2px solid var(--line);
-      padding: 9px 7px 7px; cursor: grab; transition: background .12s; touch-action: pan-y; user-select: none;
+      padding: 9px 7px 7px; cursor: grab; transition: background .12s; user-select: none;
     }
-    .corner { touch-action: pan-y; }
-    .calbody.swiping .dayhead { cursor: grabbing; }
-    .sheet.swiping { transition: none; }
+    .calbody.dragging, .calbody.dragging .dayhead { cursor: grabbing; }
     .dayhead:hover { background: var(--panel-2); }
     .dh-top { display: flex; align-items: center; justify-content: center; gap: 7px; }
     .dh-top .dow { font-size: 12px; font-weight: 800; color: var(--ink-3); }
@@ -209,7 +206,7 @@
       .scrim.on { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 55; }
       .menu-btn { display: inline-flex; }
       .month { font-size: 16px; min-width: 0; }
-      .sheet { grid-template-columns: 48px repeat(7, minmax(112px, 1fr)); min-width: 832px; }
+      .sheet { --gutw: 48px; --colw: 132px; }
     }
     ::-webkit-scrollbar { width: 12px; height: 12px; }
     ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 99px; border: 3px solid var(--panel); }
@@ -334,9 +331,14 @@
     const dur = r => Math.max(15, (r.dur || 60));
     const hourLabel = h => h === 12 ? '12 PM' : (h === 0 || h === 24 ? '12 AM' : (h < 12 ? h + ' AM' : (h - 12) + ' PM'));
 
-    function startOfWeek(d) { const x = new Date(d); x.setDate(x.getDate() - x.getDay()); x.setHours(0, 0, 0, 0); return x; }
-    let weekStart = startOfWeek(new Date());
-    const weekDays = () => Array.from({ length: 7 }, (_, i) => { const d = new Date(weekStart); d.setDate(d.getDate() + i); return d; });
+    // 연속 날짜 범위 (가로 스크롤). 오늘 기준 앞 4주 ~ 뒤로 넉넉히.
+    const DAY_MS = 86400000;
+    const startOfDay = d => { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; };
+    function startOfWeek(d) { const x = startOfDay(d); x.setDate(x.getDate() - x.getDay()); return x; }
+    let rangeStart = startOfWeek(new Date()); rangeStart.setDate(rangeStart.getDate() - 28); rangeStart = startOfDay(rangeStart);
+    const RANGE_DAYS = 168; // 24주 (뒤로 20주까지 스크롤 가능)
+    const rangeDays = () => Array.from({ length: RANGE_DAYS }, (_, i) => { const d = new Date(rangeStart); d.setDate(d.getDate() + i); return d; });
+    const dayIndex = date => Math.round((startOfDay(date) - rangeStart) / DAY_MS);
 
     function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 1900); }
 
@@ -361,24 +363,23 @@
 
     // ===== 캘린더 렌더 =====
     function renderCalendar() {
-      const days = weekDays();
-      const mid = days[3];
-      document.getElementById('monthLabel').textContent = mid.getFullYear() + '년 ' + (mid.getMonth() + 1) + '월';
+      const days = rangeDays();
       const today = ymd(new Date());
       const sheet = document.getElementById('sheet');
+      sheet.style.gridTemplateColumns = 'var(--gutw) repeat(' + RANGE_DAYS + ', var(--colw))';
       sheet.innerHTML = '';
 
-      // 헤더 행: 코너 + 요일 7
+      // 헤더 행: 코너 + 날짜들
       const corner = document.createElement('div'); corner.className = 'corner'; sheet.appendChild(corner);
       const allByDate = {}; RECS.filter(isAllDay).forEach(r => (allByDate[r.date] = allByDate[r.date] || []).push(r));
-      days.forEach((d, i) => {
-        const ds = ymd(d), isT = ds === today;
+      days.forEach(d => {
+        const ds = ymd(d), isT = ds === today, dow = d.getDay();
         const h = document.createElement('div');
         h.className = 'dayhead' + (isT ? ' today' : ''); h.dataset.date = ds;
-        const dowCls = i === 0 ? 'sun' : (i === 6 ? 'sat' : '');
+        const dowCls = dow === 0 ? 'sun' : (dow === 6 ? 'sat' : '');
         const chips = (allByDate[ds] || []).map(r => `<div class="ad-ev c-${colorOf(r)} ${r.status === '완료' ? 'done' : ''}" data-id="${r.id}">${esc(r.title || '(제목 없음)')}</div>`).join('');
-        h.innerHTML = `<div class="dh-top"><span class="dow ${dowCls}">${WD[i]}</span><span class="dnum">${d.getDate()}</span></div><div class="dh-all">${chips}</div>`;
-        h.addEventListener('click', e => { if (window._swiped && Date.now() - window._swiped < 320) return; const chip = e.target.closest('.ad-ev'); if (chip) { e.stopPropagation(); editById(chip.dataset.id); } else openModal({ date: ds, allDay: true }); });
+        h.innerHTML = `<div class="dh-top"><span class="dow ${dowCls}">${WD[dow]}</span><span class="dnum">${d.getDate()}</span></div><div class="dh-all">${chips}</div>`;
+        h.addEventListener('click', e => { if (window._dragScrolled && Date.now() - window._dragScrolled < 250) return; const chip = e.target.closest('.ad-ev'); if (chip) { e.stopPropagation(); editById(chip.dataset.id); } else openModal({ date: ds, allDay: true }); });
         sheet.appendChild(h);
       });
 
@@ -494,59 +495,48 @@
       else if (e.key === 'Escape') { sbInput.value = ''; sbInput.blur(); }
     };
 
-    // ===== 네비 =====
-    const sheetEl = $('sheet'), calbodyEl = $('calbody');
-    function shiftWeek(delta) { weekStart.setDate(weekStart.getDate() + 7 * delta); weekStart = new Date(weekStart); renderAll(); }
-    $('prevW').onclick = () => shiftWeek(-1);
-    $('nextW').onclick = () => shiftWeek(1);
-    $('todayBtn').onclick = () => { weekStart = startOfWeek(new Date()); renderAll(); scrollToHour(new Date().getHours()); };
+    // ===== 네비 · 가로 스크롤 =====
+    const sheetEl = $('sheet'), calbody = $('calbody');
+    const colW = () => parseFloat(getComputedStyle(sheetEl).getPropertyValue('--colw')) || 178;
+    function scrollToDate(date, smooth) {
+      const idx = Math.max(0, Math.min(RANGE_DAYS - 1, dayIndex(date)));
+      calbody.scrollTo({ left: idx * colW(), behavior: smooth ? 'smooth' : 'auto' });
+    }
+    function updateMonthLabel() {
+      const idx = Math.max(0, Math.min(RANGE_DAYS - 1, Math.round(calbody.scrollLeft / colW())));
+      const d = new Date(rangeStart); d.setDate(d.getDate() + idx);
+      document.getElementById('monthLabel').textContent = d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월';
+    }
+    $('prevW').onclick = () => calbody.scrollBy({ left: -colW() * 7, behavior: 'smooth' });
+    $('nextW').onclick = () => calbody.scrollBy({ left: colW() * 7, behavior: 'smooth' });
+    $('todayBtn').onclick = () => { scrollToDate(new Date(), true); scrollToHour(new Date().getHours()); };
 
-    // ===== 상단 요일 헤더 좌우 스와이프 → 주 이동 =====
-    let sw = null;
-    function onDown(e) {
-      const h = e.target.closest('.dayhead, .corner'); if (!h) return;
-      sw = { x: e.clientX, y: e.clientY, moved: false };
-    }
-    function onMove(e) {
-      if (!sw) return;
-      const dx = e.clientX - sw.x, dy = e.clientY - sw.y;
-      if (!sw.moved) {
-        if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
-        if (Math.abs(dy) > Math.abs(dx)) { sw = null; return; } // 세로 제스처는 스크롤에 양보
-        sw.moved = true; sheetEl.classList.add('swiping'); calbodyEl.classList.add('swiping');
-      }
+    // 월 라벨: 스크롤 위치에 따라 갱신
+    calbody.addEventListener('scroll', updateMonthLabel, { passive: true });
+
+    // ===== 헤더 위에서 마우스 드래그 → 가로 스크롤 (요일 이동) =====
+    let drag = null;
+    calbody.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse') return;                 // 터치는 네이티브 스크롤에 맡김
+      if (!e.target.closest('.dayhead, .corner')) return;
+      drag = { x: e.clientX, sl: calbody.scrollLeft, moved: false };
+    });
+    window.addEventListener('pointermove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!drag.moved) { if (Math.abs(dx) < 5) return; drag.moved = true; calbody.classList.add('dragging'); }
       e.preventDefault();
-      sheetEl.style.transform = `translateX(${dx * 0.38}px)`;
-    }
-    function onUp(e) {
-      if (!sw) return;
-      if (sw.moved) {
-        const dx = e.clientX - sw.x;
-        sheetEl.classList.remove('swiping'); calbodyEl.classList.remove('swiping');
-        if (Math.abs(dx) > 55) {
-          window._swiped = Date.now();
-          shiftWeek(dx > 0 ? -1 : 1);          // 오른쪽으로 밀면 이전 주, 왼쪽이면 다음 주
-          sheetEl.style.transition = 'none';
-          sheetEl.style.transform = `translateX(${dx > 0 ? -46 : 46}px)`;
-          requestAnimationFrame(() => { sheetEl.style.transition = 'transform .22s cubic-bezier(.22,1,.36,1)'; sheetEl.style.transform = 'translateX(0)'; });
-        } else {
-          sheetEl.style.transition = 'transform .2s cubic-bezier(.22,1,.36,1)';
-          sheetEl.style.transform = 'translateX(0)';
-        }
-      }
-      sw = null;
-    }
-    calbodyEl.addEventListener('pointerdown', onDown);
-    window.addEventListener('pointermove', onMove, { passive: false });
-    window.addEventListener('pointerup', onUp);
-    window.addEventListener('pointercancel', () => { if (sw && sw.moved) { sheetEl.classList.remove('swiping'); calbodyEl.classList.remove('swiping'); sheetEl.style.transition = 'transform .2s ease'; sheetEl.style.transform = 'translateX(0)'; } sw = null; });
+      calbody.scrollLeft = drag.sl - dx;
+    }, { passive: false });
+    function endDrag() { if (drag && drag.moved) { window._dragScrolled = Date.now(); calbody.classList.remove('dragging'); } drag = null; }
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('pointercancel', endDrag);
 
     const sidebar = $('sidebar'), scrim = $('scrim');
     $('menuBtn').onclick = () => { sidebar.classList.add('open'); scrim.classList.add('on'); };
     scrim.onclick = () => { sidebar.classList.remove('open'); scrim.classList.remove('on'); };
 
-    // ===== 부드러운 가로 스크롤 (헤더 위에서 휠 → 좌우 이동) =====
-    const calbody = $('calbody');
+    // ===== 헤더 위에서 휠 → 부드러운 가로 스크롤 =====
     let targetX = null, rafX = 0;
     function smoothX(delta) {
       const max = calbody.scrollWidth - calbody.clientWidth; if (max <= 0) return;
@@ -556,7 +546,6 @@
       const step = () => { const cur = calbody.scrollLeft, diff = targetX - cur; if (Math.abs(diff) < 0.5) { calbody.scrollLeft = targetX; targetX = null; return; } calbody.scrollLeft = cur + diff * 0.2; rafX = requestAnimationFrame(step); };
       rafX = requestAnimationFrame(step);
     }
-    // 요일 헤더/시간축 위에서 세로 휠을 가로 스크롤로 변환
     calbody.addEventListener('wheel', e => {
       const onHeader = e.target.closest('.dayhead, .corner');
       if (onHeader && Math.abs(e.deltaY) > Math.abs(e.deltaX)) { e.preventDefault(); smoothX(e.deltaY); }
@@ -567,7 +556,9 @@
 
     // ===== 시작 =====
     renderAll();
+    scrollToDate(new Date(), false);
     scrollToHour(new Date().getHours());
+    updateMonthLabel();
     setInterval(() => { if (!document.hidden) renderCalendar(); }, 60000);
   </script>
 </body>
