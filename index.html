@@ -15,32 +15,33 @@
   <style>
     /* ===== 테마 토큰 ===== */
     :root {
-      --bg: #f7f6fb; --panel: #ffffff; --panel-2: #faf9fd; --panel-3: #f1eef8;
-      --ink: #2b2738; --ink-2: #6d6782; --ink-3: #a49dba; --line: #ece8f5; --line-2: #f4f1fa;
-      --accent: #8b74e0; --accent-2: #7860d6; --accent-soft: #efeafb;
-      --now: #f0578a; --shadow: 0 14px 40px -16px rgba(90,70,150,.28), 0 2px 8px rgba(90,70,150,.06);
-      --hour: 54px;
-      /* 파스텔 블록 (라이트) */
-      --c-lav-bg:#efeafc; --c-lav-fg:#6a4fca; --c-lav-bar:#a78fe6;
-      --c-mint-bg:#e3f5ef; --c-mint-fg:#248f70; --c-mint-bar:#5fc3a6;
-      --c-peach-bg:#fdeee2; --c-peach-fg:#c56f38; --c-peach-bar:#eda478;
-      --c-sky-bg:#e7f1fc; --c-sky-fg:#3877bd; --c-sky-bar:#7db0e6;
-      --c-rose-bg:#fce8f1; --c-rose-fg:#bf5486; --c-rose-bar:#e793b8;
-      --c-amber-bg:#fbf3d9; --c-amber-fg:#a37f1c; --c-amber-bar:#dcc05a;
-      --c-slate-bg:#ebedf2; --c-slate-fg:#586275; --c-slate-bar:#98a2b3;
+      --bg: #f4f2fa; --panel: #ffffff; --panel-2: #f6f4fc; --panel-3: #ece8f6;
+      --ink: #241f33; --ink-2: #5f596f; --ink-3: #8f88a3;
+      --line: #d9d2ec; --line-2: #e9e4f4; --grid-line: #e7e2f2; --col-line: #ddd6ec;
+      --accent: #8060dc; --accent-2: #6f4fd0; --accent-soft: #eee9fb;
+      --now: #ef3f7d; --shadow: 0 16px 44px -18px rgba(80,55,150,.34), 0 2px 8px rgba(80,55,150,.08);
+      --hour: 56px;
+      --c-lav-bg:#ece5fb; --c-lav-fg:#5f3fc4; --c-lav-bar:#9573e6;
+      --c-mint-bg:#dcf3ec; --c-mint-fg:#1f8266; --c-mint-bar:#4bbd9c;
+      --c-peach-bg:#fce7d8; --c-peach-fg:#bd6530; --c-peach-bar:#ec9a66;
+      --c-sky-bg:#dfecfb; --c-sky-fg:#2f6fb8; --c-sky-bar:#6ba7e4;
+      --c-rose-bg:#fbe0ee; --c-rose-fg:#b64a7d; --c-rose-bar:#e585b1;
+      --c-amber-bg:#faeecd; --c-amber-fg:#977318; --c-amber-bar:#d7b74b;
+      --c-slate-bg:#e5e8ef; --c-slate-fg:#4d5768; --c-slate-bar:#8b95a8;
     }
     html[data-theme="dark"] {
-      --bg: #131118; --panel: #1c1a23; --panel-2: #201d29; --panel-3: #272330;
-      --ink: #eae7f2; --ink-2: #a29bb5; --ink-3: #6f6883; --line: #2c2838; --line-2: #242030;
-      --accent: #a58fe8; --accent-2: #b6a3ef; --accent-soft: #2a2438;
-      --now: #ff6f9c; --shadow: 0 20px 50px -18px rgba(0,0,0,.6), 0 2px 8px rgba(0,0,0,.3);
-      --c-lav-bg:rgba(150,120,235,.20); --c-lav-fg:#c8b6f6; --c-lav-bar:#9c83e6;
-      --c-mint-bg:rgba(70,190,160,.18); --c-mint-fg:#87dcc2; --c-mint-bar:#57bda4;
-      --c-peach-bg:rgba(235,150,90,.18); --c-peach-fg:#f0b48c; --c-peach-bar:#e0985a;
-      --c-sky-bg:rgba(90,150,225,.18); --c-sky-fg:#9cc4f2; --c-sky-bar:#5e93d8;
-      --c-rose-bg:rgba(225,110,160,.18); --c-rose-fg:#f2a0c4; --c-rose-bar:#dd7aa9;
-      --c-amber-bg:rgba(215,175,70,.18); --c-amber-fg:#e6cd7e; --c-amber-bar:#cdad4d;
-      --c-slate-bg:rgba(150,160,180,.16); --c-slate-fg:#b3bccc; --c-slate-bar:#7c8699;
+      --bg: #100e16; --panel: #1a181f; --panel-2: #211e28; --panel-3: #2a2634;
+      --ink: #f0edf7; --ink-2: #b0a9c2; --ink-3: #7b7490;
+      --line: #35313f; --line-2: #262230; --grid-line: #2b2735; --col-line: #35313f;
+      --accent: #a88ff0; --accent-2: #bda7f5; --accent-soft: #2d2740;
+      --now: #ff6f9c; --shadow: 0 22px 54px -18px rgba(0,0,0,.66), 0 2px 10px rgba(0,0,0,.4);
+      --c-lav-bg:rgba(158,128,240,.24); --c-lav-fg:#d0c0fb; --c-lav-bar:#a488ee;
+      --c-mint-bg:rgba(75,200,168,.20); --c-mint-fg:#8fe3ca; --c-mint-bar:#54c7ac;
+      --c-peach-bg:rgba(240,155,95,.20); --c-peach-fg:#f5bd97; --c-peach-bar:#e59f66;
+      --c-sky-bg:rgba(95,160,235,.20); --c-sky-fg:#a4caf5; --c-sky-bar:#68a0e2;
+      --c-rose-bg:rgba(232,120,170,.20); --c-rose-fg:#f5a9cb; --c-rose-bar:#e084ac;
+      --c-amber-bg:rgba(225,185,80,.20); --c-amber-fg:#ecd589; --c-amber-bar:#d4b455;
+      --c-slate-bg:rgba(160,170,190,.18); --c-slate-fg:#bcc4d3; --c-slate-bar:#828ca0;
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -53,122 +54,97 @@
     .app { display: flex; height: 100vh; }
 
     /* ===== 사이드바 ===== */
-    .sidebar {
-      width: 320px; flex-shrink: 0; background: var(--panel); border-right: 1px solid var(--line);
-      display: flex; flex-direction: column; transition: transform .28s cubic-bezier(.22,1,.36,1);
-    }
+    .sidebar { width: 320px; flex-shrink: 0; background: var(--panel); border-right: 1px solid var(--line); display: flex; flex-direction: column; transition: transform .28s cubic-bezier(.22,1,.36,1); }
     .sb-head { padding: 20px 20px 14px; display: flex; align-items: center; gap: 10px; }
-    .sb-tab { font-size: 15px; font-weight: 800; letter-spacing: -0.03em; padding: 4px 10px; border-radius: 9px; }
+    .sb-tab { font-size: 15px; font-weight: 800; letter-spacing: -0.03em; padding: 5px 11px; border-radius: 9px; }
     .sb-tab.on { background: var(--accent-soft); color: var(--accent-2); }
-    .sb-today { font-size: 13px; color: var(--ink-3); font-weight: 600; }
+    .sb-today { font-size: 13px; color: var(--ink-2); font-weight: 600; }
     .sb-today b { color: var(--accent-2); }
-    .sb-add {
-      margin: 0 16px 6px; display: flex; align-items: center; gap: 9px; padding: 12px 14px;
-      border: 1.5px dashed var(--line); border-radius: 13px; color: var(--ink-3); cursor: pointer;
-      font-size: 14px; font-weight: 600; transition: all .15s; background: transparent;
-    }
+    .sb-add { margin: 0 16px 6px; display: flex; align-items: center; gap: 9px; padding: 12px 14px; border: 1.5px dashed var(--line); border-radius: 13px; color: var(--ink-3); cursor: pointer; font-size: 14px; font-weight: 600; transition: all .15s; background: transparent; }
     .sb-add:hover { border-color: var(--accent); color: var(--accent-2); background: var(--panel-2); }
-    .sb-add input {
-      border: none; background: transparent; outline: none; color: var(--ink); font: inherit;
-      font-size: 14px; width: 100%; display: none;
-    }
+    .sb-add input { border: none; background: transparent; outline: none; color: var(--ink); font: inherit; font-size: 14px; width: 100%; display: none; }
     .sb-add.editing { border-style: solid; border-color: var(--accent); }
     .sb-add.editing span, .sb-add.editing svg { display: none; }
     .sb-add.editing input { display: block; }
-
     .sb-list { flex: 1; overflow-y: auto; padding: 8px 12px 24px; }
-    .task {
-      display: flex; gap: 11px; padding: 11px 10px; border-radius: 12px; cursor: pointer;
-      transition: background .12s; align-items: flex-start;
-    }
+    .task { display: flex; gap: 11px; padding: 11px 10px; border-radius: 12px; cursor: pointer; transition: background .12s; align-items: flex-start; }
     .task:hover { background: var(--panel-2); }
-    .cbox {
-      width: 19px; height: 19px; border-radius: 6px; border: 2px solid var(--ink-3); flex-shrink: 0;
-      margin-top: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all .15s; background: transparent;
-    }
+    .cbox { width: 19px; height: 19px; border-radius: 6px; border: 2px solid var(--ink-3); flex-shrink: 0; margin-top: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; background: transparent; }
     .cbox svg { width: 12px; height: 12px; opacity: 0; color: #fff; }
     .cbox.done { border-color: var(--accent); background: var(--accent); }
     .cbox.done svg { opacity: 1; }
     .task-body { flex: 1; min-width: 0; }
     .task-title { font-size: 14px; font-weight: 600; line-height: 1.35; word-break: break-word; }
     .task.done .task-title { text-decoration: line-through; color: var(--ink-3); }
-    .task-sub { font-size: 12px; color: var(--ink-3); margin-top: 3px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .task-sub { font-size: 12px; color: var(--ink-3); margin-top: 4px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .pill { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; display: inline-flex; align-items: center; gap: 5px; }
     .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .flag { color: var(--now); }
-    .flag svg { width: 13px; height: 13px; }
+    .flag { color: var(--now); } .flag svg { width: 13px; height: 13px; }
     .sb-empty { text-align: center; color: var(--ink-3); font-size: 13px; padding: 30px 16px; line-height: 1.6; }
 
     /* ===== 메인 ===== */
     .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
-    .topbar { display: flex; align-items: center; gap: 14px; padding: 16px 22px; border-bottom: 1px solid var(--line); }
+    .topbar { display: flex; align-items: center; gap: 12px; padding: 15px 22px; border-bottom: 1px solid var(--line); background: var(--panel); }
     .menu-btn { display: none; }
-    .month { font-size: 19px; font-weight: 800; letter-spacing: -0.03em; }
-    .nav-btn, .icon-btn {
-      border: none; background: var(--panel-2); color: var(--ink-2); width: 34px; height: 34px;
-      border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: all .15s;
-    }
+    .month { font-size: 19px; font-weight: 800; letter-spacing: -0.03em; min-width: 128px; }
+    .nav-btn, .icon-btn { border: none; background: var(--panel-2); color: var(--ink-2); width: 34px; height: 34px; border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: all .15s; }
     .nav-btn:hover, .icon-btn:hover { background: var(--panel-3); color: var(--ink); }
     .nav-btn svg, .icon-btn svg { width: 18px; height: 18px; }
-    .today-btn {
-      border: 1px solid var(--line); background: var(--panel); color: var(--ink-2); padding: 7px 15px;
-      border-radius: 10px; cursor: pointer; font: inherit; font-weight: 700; font-size: 13px; transition: all .15s;
-    }
+    .today-btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink-2); padding: 7px 15px; border-radius: 10px; cursor: pointer; font: inherit; font-weight: 700; font-size: 13px; transition: all .15s; }
     .today-btn:hover { border-color: var(--accent); color: var(--accent-2); }
     .spacer { flex: 1; }
-    .seg-tabs { display: inline-flex; background: var(--panel-2); border-radius: 11px; padding: 4px; gap: 3px; }
-    .seg-tabs button {
-      border: none; background: transparent; color: var(--ink-2); font: inherit; font-weight: 700; font-size: 13px;
-      padding: 7px 14px; border-radius: 8px; cursor: pointer; transition: all .15s;
+
+    /* ===== 통합 캘린더 (단일 스크롤 · sticky 헤더/시간축) ===== */
+    .calbody {
+      flex: 1; overflow: auto; position: relative;
+      scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
     }
-    .seg-tabs button.on { background: var(--panel); color: var(--accent-2); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
-
-    /* 주 헤더 */
-    .week-head { display: grid; grid-template-columns: 58px repeat(7, 1fr); border-bottom: 1px solid var(--line); }
-    .wh-gutter { border-right: 1px solid var(--line); }
-    .wh-day { padding: 10px 6px; text-align: center; border-right: 1px solid var(--line-2); cursor: pointer; }
-    .wh-day .dow { font-size: 11px; font-weight: 700; color: var(--ink-3); }
-    .wh-day .dow.sun { color: var(--now); } .wh-day .dow.sat { color: var(--c-sky-fg); }
-    .wh-day .dnum {
-      font-size: 17px; font-weight: 800; margin-top: 3px; width: 34px; height: 34px; line-height: 34px;
-      border-radius: 50%; display: inline-block; letter-spacing: -0.03em;
+    .sheet {
+      display: grid;
+      grid-template-columns: 60px repeat(7, minmax(148px, 1fr));
+      grid-template-rows: auto var(--gridh, 1064px);
+      min-width: 1096px; /* 60 + 7*148 */
     }
-    .wh-day.today .dnum { background: var(--accent); color: #fff; }
+    .corner { position: sticky; top: 0; left: 0; z-index: 7; background: var(--panel); border-right: 1px solid var(--col-line); border-bottom: 2px solid var(--line); }
+    .dayhead {
+      position: sticky; top: 0; z-index: 6; background: var(--panel);
+      border-right: 1px solid var(--col-line); border-bottom: 2px solid var(--line);
+      padding: 9px 7px 7px; cursor: pointer; transition: background .12s;
+    }
+    .dayhead:hover { background: var(--panel-2); }
+    .dh-top { display: flex; align-items: center; justify-content: center; gap: 7px; }
+    .dh-top .dow { font-size: 12px; font-weight: 800; color: var(--ink-3); }
+    .dh-top .dow.sun { color: var(--now); } .dh-top .dow.sat { color: var(--c-sky-fg); }
+    .dh-top .dnum { font-size: 17px; font-weight: 800; letter-spacing: -0.03em; width: 30px; height: 30px; line-height: 30px; text-align: center; border-radius: 50%; }
+    .dayhead.today .dnum { background: var(--accent); color: #fff; }
+    .dayhead.today { background: color-mix(in srgb, var(--accent) 7%, var(--panel)); }
+    .dh-all { display: flex; flex-direction: column; gap: 3px; margin-top: 6px; min-height: 4px; }
+    .ad-ev { font-size: 11px; font-weight: 700; padding: 3px 7px; border-radius: 6px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: 1px solid transparent; }
 
-    /* 종일 */
-    .allday { display: grid; grid-template-columns: 58px repeat(7, 1fr); border-bottom: 1px solid var(--line); max-height: 92px; overflow-y: auto; }
-    .allday .ad-label { border-right: 1px solid var(--line); font-size: 10.5px; color: var(--ink-3); font-weight: 700; padding: 8px 6px; text-align: right; }
-    .allday .ad-col { border-right: 1px solid var(--line-2); padding: 5px 5px; min-height: 34px; display: flex; flex-direction: column; gap: 4px; }
-    .ad-ev { font-size: 11.5px; font-weight: 700; padding: 4px 8px; border-radius: 7px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-    /* 타임그리드 */
-    .grid-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; }
-    .grid { display: grid; grid-template-columns: 58px repeat(7, 1fr); position: relative; }
-    .times { position: relative; border-right: 1px solid var(--line); }
+    .gutter { position: sticky; left: 0; z-index: 5; background: var(--panel); border-right: 1px solid var(--col-line); }
     .tlabel { height: var(--hour); position: relative; }
-    .tlabel span { position: absolute; top: -7px; right: 8px; font-size: 11px; color: var(--ink-3); font-weight: 600; }
-    .days { display: grid; grid-template-columns: repeat(7, 1fr); grid-column: 2 / -1; }
-    .col {
-      position: relative; border-right: 1px solid var(--line-2); cursor: pointer;
-      background-image: repeating-linear-gradient(to bottom, transparent, transparent calc(var(--hour) - 1px), var(--line-2) calc(var(--hour) - 1px), var(--line-2) var(--hour));
-    }
-    .col.today { background-color: color-mix(in srgb, var(--accent) 4%, transparent); }
-    .ev {
-      position: absolute; left: 2px; right: 2px; border-radius: 9px; padding: 5px 8px; overflow: hidden;
-      cursor: pointer; font-size: 12px; z-index: 2; border: 1px solid transparent;
-      transition: filter .12s, transform .12s; box-shadow: 0 1px 3px rgba(0,0,0,.06);
-    }
-    .ev:hover { filter: brightness(1.03); transform: translateY(-1px); z-index: 5; box-shadow: var(--shadow); }
-    .ev::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
-    .ev .ev-t { font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-    .ev .ev-time { font-size: 11px; opacity: .82; margin-top: 2px; font-weight: 600; }
-    .ev.done { opacity: .55; }
-    .ev.done .ev-t { text-decoration: line-through; }
-    .ev .ev-flag { position: absolute; top: 5px; right: 6px; }
-    .ev .ev-flag svg { width: 12px; height: 12px; }
+    .tlabel::after { content: ''; position: absolute; top: 0; right: 0; width: 6px; border-top: 1px solid var(--grid-line); }
+    .tlabel span { position: absolute; top: -8px; right: 9px; font-size: 11px; color: var(--ink-3); font-weight: 700; background: var(--panel); padding-left: 3px; }
 
-    /* 색상 매핑 */
+    .col {
+      position: relative; border-right: 1px solid var(--col-line); cursor: pointer;
+      background-image: repeating-linear-gradient(to bottom, transparent, transparent calc(var(--hour) - 1px), var(--grid-line) calc(var(--hour) - 1px), var(--grid-line) var(--hour));
+    }
+    .col.today { background-color: color-mix(in srgb, var(--accent) 5%, transparent); }
+    .ev {
+      position: absolute; left: 3px; right: 3px; border-radius: 9px; padding: 5px 9px; overflow: hidden;
+      cursor: pointer; font-size: 12px; z-index: 2; border: 1px solid rgba(0,0,0,.05);
+      box-shadow: 0 2px 6px rgba(60,40,110,.10); transition: filter .12s, transform .12s, box-shadow .12s;
+    }
+    html[data-theme="dark"] .ev { border-color: rgba(255,255,255,.07); box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+    .ev:hover { filter: brightness(1.04); transform: translateY(-1px); z-index: 4; box-shadow: var(--shadow); }
+    .ev::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+    .ev .ev-t { font-weight: 800; line-height: 1.25; letter-spacing: -0.01em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+    .ev .ev-time { font-size: 11px; opacity: .9; margin-top: 2px; font-weight: 700; }
+    .ev.done { opacity: .55; } .ev.done .ev-t { text-decoration: line-through; }
+    .ev .ev-flag { position: absolute; top: 5px; right: 6px; } .ev .ev-flag svg { width: 12px; height: 12px; }
+
     .c-lav  { background: var(--c-lav-bg);  color: var(--c-lav-fg); }  .c-lav::before  { background: var(--c-lav-bar); }
     .c-mint { background: var(--c-mint-bg); color: var(--c-mint-fg); } .c-mint::before { background: var(--c-mint-bar); }
     .c-peach{ background: var(--c-peach-bg);color: var(--c-peach-fg);} .c-peach::before{ background: var(--c-peach-bar); }
@@ -177,9 +153,8 @@
     .c-amber{ background: var(--c-amber-bg);color: var(--c-amber-fg);} .c-amber::before{ background: var(--c-amber-bar); }
     .c-slate{ background: var(--c-slate-bg);color: var(--c-slate-fg);} .c-slate::before{ background: var(--c-slate-bar); }
 
-    /* 현재 시각선 */
-    .nowline { position: absolute; left: 58px; right: 0; height: 0; border-top: 2px solid var(--now); z-index: 6; pointer-events: none; }
-    .nowline::before { content: ''; position: absolute; left: -5px; top: -5px; width: 8px; height: 8px; border-radius: 50%; background: var(--now); }
+    .nowline { position: absolute; left: 0; right: 0; height: 0; border-top: 2px solid var(--now); z-index: 3; pointer-events: none; }
+    .nowline::before { content: ''; position: absolute; left: -3px; top: -5px; width: 9px; height: 9px; border-radius: 50%; background: var(--now); box-shadow: 0 0 0 3px color-mix(in srgb, var(--now) 25%, transparent); }
 
     /* ===== 모달 ===== */
     .overlay { position: fixed; inset: 0; background: rgba(20,16,30,.5); backdrop-filter: blur(3px); display: none; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
@@ -225,31 +200,24 @@
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     .scrim { display: none; }
-    /* 반응형 */
     @media (max-width: 860px) {
       .sidebar { position: fixed; z-index: 60; height: 100%; transform: translateX(-100%); box-shadow: var(--shadow); }
       .sidebar.open { transform: none; }
       .scrim.on { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 55; }
       .menu-btn { display: inline-flex; }
-      .seg-tabs { display: none; }
-      .days, .week-head, .allday, .grid { grid-template-columns: 48px repeat(7, minmax(96px, 1fr)); }
-      .grid-scroll { overflow-x: auto; }
-      .week-head, .allday { overflow-x: auto; }
-      .month { font-size: 16px; }
+      .month { font-size: 16px; min-width: 0; }
+      .sheet { grid-template-columns: 48px repeat(7, minmax(112px, 1fr)); min-width: 832px; }
     }
-    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar { width: 12px; height: 12px; }
     ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 99px; border: 3px solid var(--panel); }
     ::-webkit-scrollbar-thumb:hover { background: var(--ink-3); }
+    ::-webkit-scrollbar-corner { background: var(--panel); }
   </style>
 </head>
 <body>
   <div class="app">
-    <!-- 사이드바 -->
     <aside class="sidebar" id="sidebar">
-      <div class="sb-head">
-        <span class="sb-tab on">인박스</span>
-        <span class="sb-today">오늘 <b id="todayCount">0</b></span>
-      </div>
+      <div class="sb-head"><span class="sb-tab on">인박스</span><span class="sb-today">오늘 <b id="todayCount">0</b></span></div>
       <button class="sb-add" id="sbAdd">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
         <span>할 일 추가</span>
@@ -259,34 +227,19 @@
     </aside>
     <div class="scrim" id="scrim"></div>
 
-    <!-- 메인 -->
     <main class="main">
       <div class="topbar">
-        <button class="icon-btn menu-btn" id="menuBtn" title="할 일">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        </button>
+        <button class="icon-btn menu-btn" id="menuBtn" title="할 일"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
         <div class="month" id="monthLabel">—</div>
         <button class="nav-btn" id="prevW" title="이전 주"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
         <button class="nav-btn" id="nextW" title="다음 주"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
         <button class="today-btn" id="todayBtn">오늘</button>
         <div class="spacer"></div>
-        <div class="seg-tabs">
-          <button class="on">주간</button>
-        </div>
-        <button class="icon-btn" id="themeBtn" title="테마 전환">
-          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        </button>
+        <button class="icon-btn" id="themeBtn" title="테마 전환"><svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
       </div>
 
-      <div class="week-head" id="weekHead"></div>
-      <div class="allday" id="allday"></div>
-
-      <div class="grid-scroll" id="gridScroll">
-        <div class="grid" id="grid">
-          <div class="times" id="times"></div>
-          <div class="days" id="days"></div>
-          <div class="nowline" id="nowline" style="display:none"></div>
-        </div>
+      <div class="calbody" id="calbody">
+        <div class="sheet" id="sheet"></div>
       </div>
     </main>
   </div>
@@ -296,60 +249,33 @@
     <div class="modal">
       <div class="m-head">
         <div class="grow"></div>
-        <button class="icon-btn m-flagbtn" id="mFlag" title="우선순위">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
-        </button>
+        <button class="icon-btn m-flagbtn" id="mFlag" title="우선순위"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg></button>
         <button class="icon-btn" id="mClose" title="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
       </div>
       <div class="m-body">
         <input type="hidden" id="m-id">
         <input class="m-title-in" id="m-title" placeholder="제목을 입력하세요">
-
         <div class="frow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
-          <div class="seg type" id="m-type">
-            <button data-v="공부" class="on"><span class="cdot"></span>공부</button>
-            <button data-v="업무"><span class="cdot"></span>업무</button>
-          </div>
+          <div class="seg type" id="m-type"><button data-v="공부" class="on"><span class="cdot"></span>공부</button><button data-v="업무"><span class="cdot"></span>업무</button></div>
         </div>
-
-        <div class="frow">
-          <label>분류</label>
-          <input class="in flex" id="m-category" placeholder="예: 영어 / 프로젝트A">
-        </div>
-
+        <div class="frow"><label>분류</label><input class="in flex" id="m-category" placeholder="예: 영어 / 프로젝트A"></div>
         <div class="frow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
           <input class="in" id="m-date" type="date">
           <span style="color:var(--ink-3);font-size:12px;font-weight:600">종일</span>
           <button class="switch" id="m-allday" type="button"></button>
         </div>
-
         <div class="frow" id="timeRow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          <input class="in" id="m-start" type="time" step="300">
-          <span style="color:var(--ink-3)">→</span>
-          <input class="in" id="m-end" type="time" step="300">
+          <input class="in" id="m-start" type="time" step="300"><span style="color:var(--ink-3)">→</span><input class="in" id="m-end" type="time" step="300">
         </div>
-
         <div class="frow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          <div class="seg stat" id="m-status">
-            <button data-v="예정" class="on">예정</button>
-            <button data-v="진행중">진행중</button>
-            <button data-v="완료">완료</button>
-          </div>
+          <div class="seg stat" id="m-status"><button data-v="예정" class="on">예정</button><button data-v="진행중">진행중</button><button data-v="완료">완료</button></div>
         </div>
-
-        <div class="frow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>
-          <div class="colors" id="m-colors"></div>
-        </div>
-
-        <div class="frow" style="align-items:flex-start">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:4px"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
-          <textarea class="in" id="m-memo" placeholder="메모"></textarea>
-        </div>
+        <div class="frow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg><div class="colors" id="m-colors"></div></div>
+        <div class="frow" style="align-items:flex-start"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:4px"><path d="M4 6h16M4 12h16M4 18h10"/></svg><textarea class="in" id="m-memo" placeholder="메모"></textarea></div>
       </div>
       <div class="m-actions">
         <button class="btn del" id="mDelete" title="삭제" style="display:none"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
@@ -362,6 +288,13 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    // ===== 설정 =====
+    const START_HOUR = 5, END_HOUR = 24;          // 오전 5시 ~ 자정
+    const HOURS = END_HOUR - START_HOUR;
+    const HOUR_PX = 56;
+    const GRID_H = HOURS * HOUR_PX;
+    document.getElementById('sheet').style.setProperty('--gridh', GRID_H + 'px');
+
     // ===== 저장소 =====
     const LS_KEY = 'sw_records_v1';
     const load = () => { try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (_) { return []; } };
@@ -371,19 +304,16 @@
     // ===== 테마 =====
     const THEME_KEY = 'sw_theme';
     function applyTheme(t) {
-      document.documentElement.dataset.theme = t;
-      localStorage.setItem(THEME_KEY, t);
+      document.documentElement.dataset.theme = t; localStorage.setItem(THEME_KEY, t);
       document.getElementById('themeIcon').innerHTML = t === 'dark'
         ? '<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>'
         : '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
     }
     applyTheme(localStorage.getItem(THEME_KEY) || 'light');
-    document.getElementById('themeBtn').onclick = () =>
-      applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+    document.getElementById('themeBtn').onclick = () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
 
     // ===== 유틸 =====
     const COLORS = ['lav', 'mint', 'peach', 'sky', 'rose', 'amber', 'slate'];
-    const HOUR_PX = 54;
     const pad = n => String(n).padStart(2, '0');
     const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const ymd = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
@@ -392,235 +322,161 @@
     const nowStamp = () => { const d = new Date(); return ymd(d) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()); };
     const WD = ['일', '월', '화', '수', '목', '금', '토'];
     const uid = () => 'R' + Date.now() + Math.floor(Math.random() * 900 + 100);
+    const minToTop = m => (m - START_HOUR * 60) / 60 * HOUR_PX;
 
-    function colorOf(r) { return r.color || (r.type === '업무' ? 'mint' : 'lav'); }
-    function isTimed(r) { return r.date && r.start && !r.allDay; }
-    function isAllDay(r) { return r.date && r.allDay; }
-    function isInbox(r) { return !isTimed(r) && !isAllDay(r); }
-    function dur(r) { return Math.max(15, (r.dur || 60)); }
+    const colorOf = r => r.color || (r.type === '업무' ? 'mint' : 'lav');
+    const isTimed = r => r.date && r.start && !r.allDay;
+    const isAllDay = r => r.date && r.allDay;
+    const isInbox = r => !isTimed(r) && !isAllDay(r);
+    const dur = r => Math.max(15, (r.dur || 60));
+    const hourLabel = h => h === 12 ? '12 PM' : (h === 0 || h === 24 ? '12 AM' : (h < 12 ? h + ' AM' : (h - 12) + ' PM'));
 
     function startOfWeek(d) { const x = new Date(d); x.setDate(x.getDate() - x.getDay()); x.setHours(0, 0, 0, 0); return x; }
     let weekStart = startOfWeek(new Date());
+    const weekDays = () => Array.from({ length: 7 }, (_, i) => { const d = new Date(weekStart); d.setDate(d.getDate() + i); return d; });
 
-    function toast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg; t.classList.add('show');
-      clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 1900);
-    }
+    function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 1900); }
 
-    // ===== 렌더: 주 헤더 · 종일 · 그리드 =====
-    function weekDays() { return Array.from({ length: 7 }, (_, i) => { const d = new Date(weekStart); d.setDate(d.getDate() + i); return d; }); }
-
-    function renderHead() {
-      const days = weekDays();
-      const mid = days[3];
-      document.getElementById('monthLabel').textContent = mid.getFullYear() + '년 ' + (mid.getMonth() + 1) + '월';
-      const today = ymd(new Date());
-      document.getElementById('weekHead').innerHTML = '<div class="wh-gutter"></div>' + days.map((d, i) => {
-        const dowCls = i === 0 ? 'sun' : (i === 6 ? 'sat' : '');
-        const isT = ymd(d) === today;
-        return `<div class="wh-day ${isT ? 'today' : ''}" data-date="${ymd(d)}">
-          <div class="dow ${dowCls}">${WD[i]}</div><div class="dnum">${d.getDate()}</div></div>`;
-      }).join('');
-      document.querySelectorAll('.wh-day').forEach(el => el.onclick = () => openModal({ date: el.dataset.date, allDay: true }));
-    }
-
-    function evBlockHtml(r) {
-      const flag = r.flag ? `<span class="ev-flag flag"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/></svg></span>` : '';
-      const timeTxt = r.allDay ? '' : `<div class="ev-time">${r.start}${r.dur ? '~' + m2t(t2m(r.start) + r.dur) : ''}</div>`;
-      return `<div class="ev-t">${esc(r.title || '(제목 없음)')}</div>${timeTxt}${flag}`;
-    }
-
-    function renderAllDay() {
-      const days = weekDays();
-      const byDate = {};
-      RECS.filter(isAllDay).forEach(r => { (byDate[r.date] = byDate[r.date] || []).push(r); });
-      document.getElementById('allday').innerHTML = '<div class="ad-label">종일</div>' + days.map(d => {
-        const list = (byDate[ymd(d)] || []);
-        return `<div class="ad-col">` + list.map(r =>
-          `<div class="ad-ev c-${colorOf(r)} ${r.status === '완료' ? 'done' : ''}" data-id="${r.id}">${esc(r.title || '(제목 없음)')}</div>`
-        ).join('') + `</div>`;
-      }).join('');
-      document.querySelectorAll('.ad-ev').forEach(el => el.onclick = () => editById(el.dataset.id));
-    }
-
-    // 겹침 배치
+    // ===== 겹침 배치 =====
     function packDay(evs) {
       evs.sort((a, b) => a._s - b._s || a._e - b._e);
       let cluster = [], curEnd = -1;
       const flush = () => {
         const cols = [];
-        cluster.forEach(e => {
-          let placed = false;
-          for (let i = 0; i < cols.length; i++) { if (cols[i] <= e._s) { e._col = i; cols[i] = e._e; placed = true; break; } }
-          if (!placed) { e._col = cols.length; cols.push(e._e); }
-        });
-        cluster.forEach(e => e._cols = cols.length);
-        cluster = []; curEnd = -1;
+        cluster.forEach(e => { let placed = false; for (let i = 0; i < cols.length; i++) { if (cols[i] <= e._s) { e._col = i; cols[i] = e._e; placed = true; break; } } if (!placed) { e._col = cols.length; cols.push(e._e); } });
+        cluster.forEach(e => e._cols = cols.length); cluster = []; curEnd = -1;
       };
       evs.forEach(e => { if (cluster.length && e._s >= curEnd) flush(); cluster.push(e); curEnd = Math.max(curEnd, e._e); });
       if (cluster.length) flush();
     }
 
-    function renderGrid() {
-      // 시간 눈금
-      let tl = '';
-      for (let h = 0; h < 24; h++) tl += `<div class="tlabel"><span>${h === 0 ? '' : (h < 12 ? h + ' AM' : (h === 12 ? '12 PM' : (h - 12) + ' PM'))}</span></div>`;
-      document.getElementById('times').innerHTML = tl;
+    function evInner(r) {
+      const flag = r.flag ? `<span class="ev-flag flag"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/></svg></span>` : '';
+      const timeTxt = `<div class="ev-time">${r.start}~${m2t(t2m(r.start) + dur(r))}</div>`;
+      return `<div class="ev-t">${esc(r.title || '(제목 없음)')}</div>${timeTxt}${flag}`;
+    }
 
+    // ===== 캘린더 렌더 =====
+    function renderCalendar() {
       const days = weekDays();
+      const mid = days[3];
+      document.getElementById('monthLabel').textContent = mid.getFullYear() + '년 ' + (mid.getMonth() + 1) + '월';
       const today = ymd(new Date());
-      const colsHtml = days.map(d => `<div class="col ${ymd(d) === today ? 'today' : ''}" data-date="${ymd(d)}" style="height:${24 * HOUR_PX}px"></div>`).join('');
-      const daysEl = document.getElementById('days');
-      daysEl.innerHTML = colsHtml;
+      const sheet = document.getElementById('sheet');
+      sheet.innerHTML = '';
 
+      // 헤더 행: 코너 + 요일 7
+      const corner = document.createElement('div'); corner.className = 'corner'; sheet.appendChild(corner);
+      const allByDate = {}; RECS.filter(isAllDay).forEach(r => (allByDate[r.date] = allByDate[r.date] || []).push(r));
+      days.forEach((d, i) => {
+        const ds = ymd(d), isT = ds === today;
+        const h = document.createElement('div');
+        h.className = 'dayhead' + (isT ? ' today' : ''); h.dataset.date = ds;
+        const dowCls = i === 0 ? 'sun' : (i === 6 ? 'sat' : '');
+        const chips = (allByDate[ds] || []).map(r => `<div class="ad-ev c-${colorOf(r)} ${r.status === '완료' ? 'done' : ''}" data-id="${r.id}">${esc(r.title || '(제목 없음)')}</div>`).join('');
+        h.innerHTML = `<div class="dh-top"><span class="dow ${dowCls}">${WD[i]}</span><span class="dnum">${d.getDate()}</span></div><div class="dh-all">${chips}</div>`;
+        h.addEventListener('click', e => { const chip = e.target.closest('.ad-ev'); if (chip) { e.stopPropagation(); editById(chip.dataset.id); } else openModal({ date: ds, allDay: true }); });
+        sheet.appendChild(h);
+      });
+
+      // 본문 행: 시간축 + 요일 컬럼 7
+      const gutter = document.createElement('div'); gutter.className = 'gutter';
+      let tl = ''; for (let h = START_HOUR; h < END_HOUR; h++) tl += `<div class="tlabel"><span>${hourLabel(h)}</span></div>`;
+      gutter.innerHTML = tl; sheet.appendChild(gutter);
+
+      const now = new Date(), nowMin = now.getHours() * 60 + now.getMinutes();
       days.forEach(d => {
-        const ds = ymd(d);
-        const col = daysEl.querySelector(`.col[data-date="${ds}"]`);
+        const ds = ymd(d), isT = ds === today;
+        const col = document.createElement('div'); col.className = 'col' + (isT ? ' today' : ''); col.dataset.date = ds;
         const evs = RECS.filter(r => isTimed(r) && r.date === ds).map(r => ({ r, _s: t2m(r.start), _e: t2m(r.start) + dur(r) }));
         packDay(evs);
         evs.forEach(e => {
-          const top = e._s / 60 * HOUR_PX;
-          const h = Math.max(22, dur(e.r) / 60 * HOUR_PX - 2);
+          const top = Math.max(0, minToTop(e._s));
+          const rawH = dur(e.r) / 60 * HOUR_PX - 2;
+          const h = Math.max(22, Math.min(rawH, GRID_H - top));
           const w = 100 / e._cols, left = e._col * w;
           const div = document.createElement('div');
           div.className = `ev c-${colorOf(e.r)} ${e.r.status === '완료' ? 'done' : ''}`;
-          div.style.cssText = `top:${top}px;height:${h}px;left:calc(${left}% + 2px);width:calc(${w}% - 4px);`;
-          div.innerHTML = evBlockHtml(e.r);
-          div.onclick = (ev) => { ev.stopPropagation(); editById(e.r.id); };
+          div.style.cssText = `top:${top}px;height:${h}px;left:calc(${left}% + 3px);width:calc(${w}% - 6px);`;
+          div.innerHTML = evInner(e.r);
+          div.addEventListener('click', ev => { ev.stopPropagation(); editById(e.r.id); });
           col.appendChild(div);
         });
-        // 빈 곳 클릭 → 그 시간에 추가
-        col.onclick = (ev) => {
-          const y = ev.offsetY;
-          let min = Math.round((y / HOUR_PX * 60) / 30) * 30;
-          min = Math.max(0, Math.min(23 * 60 + 30, min));
+        if (isT && nowMin >= START_HOUR * 60 && nowMin <= END_HOUR * 60) {
+          const nl = document.createElement('div'); nl.className = 'nowline'; nl.style.top = minToTop(nowMin) + 'px'; col.appendChild(nl);
+        }
+        col.addEventListener('click', ev => {
+          const y = ev.offsetY; let min = START_HOUR * 60 + Math.round((y / HOUR_PX * 60) / 30) * 30;
+          min = Math.max(START_HOUR * 60, Math.min(END_HOUR * 60 - 30, min));
           openModal({ date: ds, start: m2t(min), dur: 60 });
-        };
+        });
+        sheet.appendChild(col);
       });
-      renderNow();
     }
 
-    function renderNow() {
-      const now = new Date();
-      const line = document.getElementById('nowline');
-      const days = weekDays();
-      const inWeek = now >= days[0] && now < new Date(days[6].getTime() + 86400000);
-      if (!inWeek) { line.style.display = 'none'; return; }
-      line.style.display = 'block';
-      line.style.top = (now.getHours() * 60 + now.getMinutes()) / 60 * HOUR_PX + 'px';
-    }
-
-    // ===== 렌더: 사이드바 =====
+    // ===== 사이드바 =====
     function renderSidebar() {
-      const inbox = RECS.filter(isInbox);
-      const today = ymd(new Date());
+      const inbox = RECS.filter(isInbox), today = ymd(new Date());
       document.getElementById('todayCount').textContent = RECS.filter(r => r.date === today && r.status !== '완료').length;
       const el = document.getElementById('sbList');
       if (!inbox.length) { el.innerHTML = `<div class="sb-empty">받은 할 일이 없어요.<br>위 <b>할 일 추가</b>로 담아두면<br>나중에 캘린더로 옮길 수 있어요.</div>`; return; }
-      // 미완료 먼저
       inbox.sort((a, b) => (a.status === '완료') - (b.status === '완료') || b.id.localeCompare(a.id));
       el.innerHTML = inbox.map(r => {
-        const done = r.status === '완료';
-        const sub = [];
-        if (r.category) sub.push(`<span class="pill c-${colorOf(r)}"><span class="cdot" style="background:var(--c-${colorOf(r)}-bar)"></span>${esc(r.category)}</span>`);
-        else sub.push(`<span class="pill c-${colorOf(r)}"><span class="cdot" style="background:var(--c-${colorOf(r)}-bar)"></span>${esc(r.type)}</span>`);
+        const done = r.status === '완료', col = colorOf(r);
+        const sub = [`<span class="pill c-${col}"><span class="cdot" style="background:var(--c-${col}-bar)"></span>${esc(r.category || r.type)}</span>`];
         if (r.date) sub.push(`<span>📅 ${r.date}</span>`);
         const flag = r.flag ? `<span class="flag"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/></svg></span>` : '';
-        return `<div class="task ${done ? 'done' : ''}" data-id="${r.id}">
-          <div class="cbox ${done ? 'done' : ''}" data-check="${r.id}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-          <div class="task-body">
-            <div class="task-title">${esc(r.title || '(제목 없음)')} ${flag}</div>
-            <div class="task-sub">${sub.join('')}</div>
-          </div></div>`;
+        return `<div class="task ${done ? 'done' : ''}" data-id="${r.id}"><div class="cbox ${done ? 'done' : ''}" data-check="${r.id}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="task-body"><div class="task-title">${esc(r.title || '(제목 없음)')} ${flag}</div><div class="task-sub">${sub.join('')}</div></div></div>`;
       }).join('');
-      el.querySelectorAll('.task').forEach(t => t.onclick = (e) => { if (e.target.closest('[data-check]')) return; editById(t.dataset.id); });
-      el.querySelectorAll('[data-check]').forEach(c => c.onclick = (e) => { e.stopPropagation(); toggleDone(c.dataset.check); });
+      el.querySelectorAll('.task').forEach(t => t.onclick = e => { if (e.target.closest('[data-check]')) return; editById(t.dataset.id); });
+      el.querySelectorAll('[data-check]').forEach(c => c.onclick = e => { e.stopPropagation(); toggleDone(c.dataset.check); });
     }
 
-    function renderAll() { renderHead(); renderAllDay(); renderGrid(); renderSidebar(); }
+    function renderAll() { renderCalendar(); renderSidebar(); }
 
     // ===== CRUD =====
-    function toggleDone(id) {
-      const r = RECS.find(x => x.id === id); if (!r) return;
-      r.status = r.status === '완료' ? '예정' : '완료'; r.updatedAt = nowStamp();
-      save(RECS); renderAll();
-    }
+    function toggleDone(id) { const r = RECS.find(x => x.id === id); if (!r) return; r.status = r.status === '완료' ? '예정' : '완료'; r.updatedAt = nowStamp(); save(RECS); renderAll(); }
     function editById(id) { const r = RECS.find(x => x.id === id); if (r) openModal(r, true); }
 
     // ===== 모달 =====
-    let editingId = null, mColor = 'lav', mFlag = false, mAllday = false;
+    let editingId = null, mColor = 'lav', mFlagOn = false, mAllday = false;
     const $ = id => document.getElementById(id);
-
-    function setSeg(wrap, val) { document.querySelectorAll('#' + wrap + ' button').forEach(b => b.classList.toggle('on', b.dataset.v === val)); }
-    function segVal(wrap) { const b = document.querySelector('#' + wrap + ' button.on'); return b ? b.dataset.v : ''; }
-
-    function renderColors() {
-      $('m-colors').innerHTML = COLORS.map(c => `<div class="swatch ${c === mColor ? 'on' : ''}" data-c="${c}" style="background:var(--c-${c}-bar)"></div>`).join('');
-      document.querySelectorAll('#m-colors .swatch').forEach(s => s.onclick = () => { mColor = s.dataset.c; renderColors(); });
-    }
-    function setAllday(v) {
-      mAllday = v; $('m-allday').classList.toggle('on', v);
-      $('timeRow').style.display = v ? 'none' : 'flex';
-    }
-    function setFlag(v) { mFlag = v; $('mFlag').classList.toggle('on', v); }
+    const setSeg = (w, v) => document.querySelectorAll('#' + w + ' button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
+    const segVal = w => { const b = document.querySelector('#' + w + ' button.on'); return b ? b.dataset.v : ''; };
+    function renderColors() { $('m-colors').innerHTML = COLORS.map(c => `<div class="swatch ${c === mColor ? 'on' : ''}" data-c="${c}" style="background:var(--c-${c}-bar)"></div>`).join(''); document.querySelectorAll('#m-colors .swatch').forEach(s => s.onclick = () => { mColor = s.dataset.c; renderColors(); }); }
+    function setAllday(v) { mAllday = v; $('m-allday').classList.toggle('on', v); $('timeRow').style.display = v ? 'none' : 'flex'; }
+    function setFlag(v) { mFlagOn = v; $('mFlag').classList.toggle('on', v); }
 
     function openModal(seed, isEdit) {
-      seed = seed || {};
-      editingId = isEdit ? seed.id : null;
+      seed = seed || {}; editingId = isEdit ? seed.id : null;
       $('m-id').value = editingId || '';
       $('m-title').value = seed.title || '';
       $('m-category').value = seed.category || '';
       $('m-date').value = seed.date || '';
       $('m-start').value = seed.start || '09:00';
       $('m-end').value = seed.start ? m2t(t2m(seed.start) + (seed.dur || 60)) : (seed.dur ? m2t(t2m('09:00') + seed.dur) : '10:00');
-      setSeg('m-type', seed.type || '공부');
-      setSeg('m-status', seed.status || '예정');
+      $('m-memo').value = seed.memo || '';
+      setSeg('m-type', seed.type || '공부'); setSeg('m-status', seed.status || '예정');
       mColor = seed.color || (seed.type === '업무' ? 'mint' : 'lav');
-      setFlag(!!seed.flag);
-      setAllday(!!seed.allDay);
-      renderColors();
+      setFlag(!!seed.flag); setAllday(!!seed.allDay); renderColors();
       $('mDelete').style.display = isEdit ? 'flex' : 'none';
-      $('overlay').classList.add('on');
-      setTimeout(() => $('m-title').focus(), 60);
+      $('overlay').classList.add('on'); setTimeout(() => $('m-title').focus(), 60);
     }
-    function closeModal() { $('overlay').classList.remove('on'); }
+    const closeModal = () => $('overlay').classList.remove('on');
 
     function saveModal() {
-      const title = $('m-title').value.trim();
-      if (!title) { toast('제목을 입력해주세요'); return; }
+      const title = $('m-title').value.trim(); if (!title) { toast('제목을 입력해주세요'); return; }
       const start = $('m-start').value, end = $('m-end').value;
-      let d = Math.max(15, t2m(end) - t2m(start)); if (!d || d < 0) d = 60;
-      const rec = {
-        id: editingId || uid(),
-        title, type: segVal('m-type'), category: $('m-category').value.trim(),
-        date: $('m-date').value, allDay: mAllday,
-        start: mAllday ? '' : start, dur: mAllday ? 0 : d,
-        status: segVal('m-status'), flag: mFlag, color: mColor,
-        memo: $('m-memo') ? $('m-memo').value.trim() : '',
-        updatedAt: nowStamp()
-      };
-      if (editingId) {
-        const i = RECS.findIndex(x => x.id === editingId);
-        rec.createdAt = RECS[i].createdAt || nowStamp();
-        RECS[i] = rec;
-      } else { rec.createdAt = nowStamp(); RECS.push(rec); }
-      save(RECS); renderAll(); closeModal();
-      toast(editingId ? '수정했어요' : '추가했어요');
+      let d = t2m(end) - t2m(start); if (!d || d < 15) d = 60;
+      const rec = { id: editingId || uid(), title, type: segVal('m-type'), category: $('m-category').value.trim(), date: $('m-date').value, allDay: mAllday, start: mAllday ? '' : start, dur: mAllday ? 0 : d, status: segVal('m-status'), flag: mFlagOn, color: mColor, memo: $('m-memo').value.trim(), updatedAt: nowStamp() };
+      if (editingId) { const i = RECS.findIndex(x => x.id === editingId); rec.createdAt = RECS[i].createdAt || nowStamp(); RECS[i] = rec; }
+      else { rec.createdAt = nowStamp(); RECS.push(rec); }
+      save(RECS); renderAll(); closeModal(); toast(editingId ? '수정했어요' : '추가했어요');
     }
-    function deleteModal() {
-      if (!editingId) return;
-      if (!confirm('이 항목을 삭제할까요?')) return;
-      RECS = RECS.filter(x => x.id !== editingId); save(RECS); renderAll(); closeModal(); toast('삭제했어요');
-    }
+    function deleteModal() { if (!editingId) return; if (!confirm('이 항목을 삭제할까요?')) return; RECS = RECS.filter(x => x.id !== editingId); save(RECS); renderAll(); closeModal(); toast('삭제했어요'); }
 
-    // 모달 이벤트
-    $('mSave').onclick = saveModal;
-    $('mCancel').onclick = closeModal;
-    $('mClose').onclick = closeModal;
-    $('mDelete').onclick = deleteModal;
-    $('mFlag').onclick = () => setFlag(!mFlag);
-    $('m-allday').onclick = () => setAllday(!mAllday);
+    $('mSave').onclick = saveModal; $('mCancel').onclick = closeModal; $('mClose').onclick = closeModal; $('mDelete').onclick = deleteModal;
+    $('mFlag').onclick = () => setFlag(!mFlagOn); $('m-allday').onclick = () => setAllday(!mAllday);
     document.querySelectorAll('#m-type button').forEach(b => b.onclick = () => { setSeg('m-type', b.dataset.v); if (!editingId) { mColor = b.dataset.v === '업무' ? 'mint' : 'lav'; renderColors(); } });
     document.querySelectorAll('#m-status button').forEach(b => b.onclick = () => setSeg('m-status', b.dataset.v));
     $('overlay').addEventListener('click', e => { if (e.target === $('overlay')) closeModal(); });
@@ -628,31 +484,46 @@
 
     // ===== 사이드바 빠른 추가 =====
     const sbAdd = $('sbAdd'), sbInput = $('sbAddInput');
-    sbAdd.onclick = (e) => { if (e.target === sbInput) return; sbAdd.classList.add('editing'); sbInput.focus(); };
+    sbAdd.onclick = e => { if (e.target === sbInput) return; sbAdd.classList.add('editing'); sbInput.focus(); };
     sbInput.onblur = () => sbAdd.classList.remove('editing');
-    sbInput.onkeydown = (e) => {
-      if (e.key === 'Enter' && sbInput.value.trim()) {
-        RECS.push({ id: uid(), title: sbInput.value.trim(), type: '공부', category: '', date: '', allDay: false, start: '', dur: 0, status: '예정', flag: false, color: 'lav', memo: '', createdAt: nowStamp(), updatedAt: nowStamp() });
-        save(RECS); sbInput.value = ''; renderSidebar(); toast('할 일에 담았어요');
-      } else if (e.key === 'Escape') { sbInput.value = ''; sbInput.blur(); }
+    sbInput.onkeydown = e => {
+      if (e.key === 'Enter' && sbInput.value.trim()) { RECS.push({ id: uid(), title: sbInput.value.trim(), type: '공부', category: '', date: '', allDay: false, start: '', dur: 0, status: '예정', flag: false, color: 'lav', memo: '', createdAt: nowStamp(), updatedAt: nowStamp() }); save(RECS); sbInput.value = ''; renderSidebar(); toast('할 일에 담았어요'); }
+      else if (e.key === 'Escape') { sbInput.value = ''; sbInput.blur(); }
     };
 
-    // ===== 상단/주 네비 =====
+    // ===== 네비 =====
     $('prevW').onclick = () => { weekStart.setDate(weekStart.getDate() - 7); weekStart = new Date(weekStart); renderAll(); };
     $('nextW').onclick = () => { weekStart.setDate(weekStart.getDate() + 7); weekStart = new Date(weekStart); renderAll(); };
     $('todayBtn').onclick = () => { weekStart = startOfWeek(new Date()); renderAll(); scrollToHour(new Date().getHours()); };
 
-    // 모바일 사이드바
     const sidebar = $('sidebar'), scrim = $('scrim');
     $('menuBtn').onclick = () => { sidebar.classList.add('open'); scrim.classList.add('on'); };
     scrim.onclick = () => { sidebar.classList.remove('open'); scrim.classList.remove('on'); };
 
-    function scrollToHour(h) { $('gridScroll').scrollTop = Math.max(0, (h - 1) * HOUR_PX); }
+    // ===== 부드러운 가로 스크롤 (헤더 위에서 휠 → 좌우 이동) =====
+    const calbody = $('calbody');
+    let targetX = null, rafX = 0;
+    function smoothX(delta) {
+      const max = calbody.scrollWidth - calbody.clientWidth; if (max <= 0) return;
+      if (targetX === null) targetX = calbody.scrollLeft;
+      targetX = Math.max(0, Math.min(max, targetX + delta));
+      cancelAnimationFrame(rafX);
+      const step = () => { const cur = calbody.scrollLeft, diff = targetX - cur; if (Math.abs(diff) < 0.5) { calbody.scrollLeft = targetX; targetX = null; return; } calbody.scrollLeft = cur + diff * 0.2; rafX = requestAnimationFrame(step); };
+      rafX = requestAnimationFrame(step);
+    }
+    // 요일 헤더/시간축 위에서 세로 휠을 가로 스크롤로 변환
+    calbody.addEventListener('wheel', e => {
+      const onHeader = e.target.closest('.dayhead, .corner');
+      if (onHeader && Math.abs(e.deltaY) > Math.abs(e.deltaX)) { e.preventDefault(); smoothX(e.deltaY); }
+      else if (e.shiftKey && Math.abs(e.deltaY) > Math.abs(e.deltaX)) { e.preventDefault(); smoothX(e.deltaY); }
+    }, { passive: false });
+
+    function scrollToHour(h) { calbody.scrollTop = Math.max(0, minToTop(Math.max(START_HOUR, h - 1) * 60)); }
 
     // ===== 시작 =====
     renderAll();
     scrollToHour(new Date().getHours());
-    setInterval(renderNow, 60000);
+    setInterval(() => { if (!document.hidden) renderCalendar(); }, 60000);
   </script>
 </body>
 </html>
