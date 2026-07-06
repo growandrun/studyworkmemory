@@ -121,6 +121,9 @@
     .dayhead.today { background: color-mix(in srgb, var(--accent) 7%, var(--panel)); }
     .dh-all { display: flex; flex-direction: column; gap: 3px; margin-top: 6px; min-height: 4px; }
     .ad-ev { font-size: 11px; font-weight: 700; padding: 3px 7px; border-radius: 6px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: 1px solid transparent; }
+    .ad-ev.span-start { border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: -8px; }
+    .ad-ev.span-mid { border-radius: 0; margin-left: -8px; margin-right: -8px; }
+    .ad-ev.span-end { border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: -8px; }
 
     .gutter { position: sticky; left: 0; z-index: 5; background: var(--panel); border-right: 1px solid var(--col-line); }
     .tlabel { height: var(--hour); position: relative; }
@@ -262,13 +265,22 @@
         <div class="frow"><label>분류</label><input class="in flex" id="m-category" placeholder="예: 영어 / 프로젝트A"></div>
         <div class="frow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          <input class="in" id="m-date" type="date">
-          <span style="color:var(--ink-3);font-size:12px;font-weight:600">종일</span>
+          <input class="in flex" id="m-date" type="date">
+          <span style="color:var(--ink-3)">→</span>
+          <input class="in flex" id="m-enddate" type="date">
+        </div>
+        <div class="frow" id="alldayRow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>
+          <label style="flex:1">하루 종일</label>
           <button class="switch" id="m-allday" type="button"></button>
         </div>
         <div class="frow" id="timeRow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           <input class="in" id="m-start" type="time" step="300"><span style="color:var(--ink-3)">→</span><input class="in" id="m-end" type="time" step="300">
+        </div>
+        <div class="frow" id="multiNote" style="display:none; color:var(--ink-3); font-size:12.5px; font-weight:600">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          여러 날에 걸친 종일 일정이에요
         </div>
         <div class="frow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
@@ -325,9 +337,18 @@
     const minToTop = m => (m - START_HOUR * 60) / 60 * HOUR_PX;
 
     const colorOf = r => r.color || (r.type === '업무' ? 'mint' : 'lav');
-    const isTimed = r => r.date && r.start && !r.allDay;
-    const isAllDay = r => r.date && r.allDay;
-    const isInbox = r => !isTimed(r) && !isAllDay(r);
+    const isMultiDay = r => r.date && r.endDate && r.endDate > r.date;
+    const isTimed = r => r.date && r.start && !r.allDay && !isMultiDay(r);
+    const isSpan = r => r.date && (r.allDay || isMultiDay(r));   // 종일 · 여러 날 (상단 영역)
+    const isInbox = r => !isTimed(r) && !isSpan(r);
+    // 여러 날 일정이 걸치는 모든 날짜를 반환
+    function coveredDates(r) {
+      const out = []; if (!r.date) return out;
+      const end = (r.endDate && r.endDate > r.date) ? r.endDate : r.date;
+      let d = startOfDay(new Date(r.date)), stop = startOfDay(new Date(end)), guard = 0;
+      while (d <= stop && guard++ < 400) { out.push(ymd(d)); d.setDate(d.getDate() + 1); }
+      return out;
+    }
     const dur = r => Math.max(15, (r.dur || 60));
     const hourLabel = h => h === 12 ? '12 PM' : (h === 0 || h === 24 ? '12 AM' : (h < 12 ? h + ' AM' : (h - 12) + ' PM'));
 
@@ -371,13 +392,21 @@
 
       // 헤더 행: 코너 + 날짜들
       const corner = document.createElement('div'); corner.className = 'corner'; sheet.appendChild(corner);
-      const allByDate = {}; RECS.filter(isAllDay).forEach(r => (allByDate[r.date] = allByDate[r.date] || []).push(r));
+      const allByDate = {};
+      RECS.filter(isSpan).forEach(r => {
+        const dates = coveredDates(r);
+        dates.forEach((ds, i) => {
+          const pos = dates.length > 1 ? (i === 0 ? 'start' : (i === dates.length - 1 ? 'end' : 'mid')) : 'single';
+          (allByDate[ds] = allByDate[ds] || []).push({ r, pos });
+        });
+      });
+      Object.values(allByDate).forEach(list => list.sort((a, b) => (a.r.date + a.r.id).localeCompare(b.r.date + b.r.id)));
       days.forEach(d => {
         const ds = ymd(d), isT = ds === today, dow = d.getDay();
         const h = document.createElement('div');
         h.className = 'dayhead' + (isT ? ' today' : ''); h.dataset.date = ds;
         const dowCls = dow === 0 ? 'sun' : (dow === 6 ? 'sat' : '');
-        const chips = (allByDate[ds] || []).map(r => `<div class="ad-ev c-${colorOf(r)} ${r.status === '완료' ? 'done' : ''}" data-id="${r.id}">${esc(r.title || '(제목 없음)')}</div>`).join('');
+        const chips = (allByDate[ds] || []).map(({ r, pos }) => `<div class="ad-ev c-${colorOf(r)} span-${pos} ${r.status === '완료' ? 'done' : ''}" data-id="${r.id}">${esc(r.title || '(제목 없음)')}</div>`).join('');
         h.innerHTML = `<div class="dh-top"><span class="dow ${dowCls}">${WD[dow]}</span><span class="dnum">${d.getDate()}</span></div><div class="dh-all">${chips}</div>`;
         h.addEventListener('click', e => { if (window._dragScrolled && Date.now() - window._dragScrolled < 250) return; const chip = e.target.closest('.ad-ev'); if (chip) { e.stopPropagation(); editById(chip.dataset.id); } else openModal({ date: ds, allDay: true }); });
         sheet.appendChild(h);
@@ -448,7 +477,14 @@
     const setSeg = (w, v) => document.querySelectorAll('#' + w + ' button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
     const segVal = w => { const b = document.querySelector('#' + w + ' button.on'); return b ? b.dataset.v : ''; };
     function renderColors() { $('m-colors').innerHTML = COLORS.map(c => `<div class="swatch ${c === mColor ? 'on' : ''}" data-c="${c}" style="background:var(--c-${c}-bar)"></div>`).join(''); document.querySelectorAll('#m-colors .swatch').forEach(s => s.onclick = () => { mColor = s.dataset.c; renderColors(); }); }
-    function setAllday(v) { mAllday = v; $('m-allday').classList.toggle('on', v); $('timeRow').style.display = v ? 'none' : 'flex'; }
+    function setAllday(v) { mAllday = v; $('m-allday').classList.toggle('on', v); refreshTimeUI(); }
+    function refreshTimeUI() {
+      const s = $('m-date').value, e = $('m-enddate').value;
+      const multi = s && e && e > s;
+      $('multiNote').style.display = multi ? 'flex' : 'none';
+      $('alldayRow').style.display = multi ? 'none' : 'flex';
+      $('timeRow').style.display = (multi || mAllday) ? 'none' : 'flex';
+    }
     function setFlag(v) { mFlagOn = v; $('mFlag').classList.toggle('on', v); }
 
     function openModal(seed, isEdit) {
@@ -457,6 +493,7 @@
       $('m-title').value = seed.title || '';
       $('m-category').value = seed.category || '';
       $('m-date').value = seed.date || '';
+      $('m-enddate').value = seed.endDate || seed.date || '';
       $('m-start').value = seed.start || '09:00';
       $('m-end').value = seed.start ? m2t(t2m(seed.start) + (seed.dur || 60)) : (seed.dur ? m2t(t2m('09:00') + seed.dur) : '10:00');
       $('m-memo').value = seed.memo || '';
@@ -470,9 +507,14 @@
 
     function saveModal() {
       const title = $('m-title').value.trim(); if (!title) { toast('제목을 입력해주세요'); return; }
+      const startDate = $('m-date').value;
+      let endDate = $('m-enddate').value || startDate;
+      if (startDate && endDate < startDate) endDate = startDate;
+      const multi = startDate && endDate > startDate;
+      const allDay = multi ? true : mAllday;
       const start = $('m-start').value, end = $('m-end').value;
       let d = t2m(end) - t2m(start); if (!d || d < 15) d = 60;
-      const rec = { id: editingId || uid(), title, type: segVal('m-type'), category: $('m-category').value.trim(), date: $('m-date').value, allDay: mAllday, start: mAllday ? '' : start, dur: mAllday ? 0 : d, status: segVal('m-status'), flag: mFlagOn, color: mColor, memo: $('m-memo').value.trim(), updatedAt: nowStamp() };
+      const rec = { id: editingId || uid(), title, type: segVal('m-type'), category: $('m-category').value.trim(), date: startDate, endDate: multi ? endDate : '', allDay, start: allDay ? '' : start, dur: allDay ? 0 : d, status: segVal('m-status'), flag: mFlagOn, color: mColor, memo: $('m-memo').value.trim(), updatedAt: nowStamp() };
       if (editingId) { const i = RECS.findIndex(x => x.id === editingId); rec.createdAt = RECS[i].createdAt || nowStamp(); RECS[i] = rec; }
       else { rec.createdAt = nowStamp(); RECS.push(rec); }
       save(RECS); renderAll(); closeModal(); toast(editingId ? '수정했어요' : '추가했어요');
@@ -481,6 +523,8 @@
 
     $('mSave').onclick = saveModal; $('mCancel').onclick = closeModal; $('mClose').onclick = closeModal; $('mDelete').onclick = deleteModal;
     $('mFlag').onclick = () => setFlag(!mFlagOn); $('m-allday').onclick = () => setAllday(!mAllday);
+    $('m-date').addEventListener('change', () => { const e = $('m-enddate'); if (!e.value || e.value < $('m-date').value) e.value = $('m-date').value; refreshTimeUI(); });
+    $('m-enddate').addEventListener('change', () => { if ($('m-enddate').value && $('m-enddate').value < $('m-date').value) $('m-enddate').value = $('m-date').value; refreshTimeUI(); });
     document.querySelectorAll('#m-type button').forEach(b => b.onclick = () => { setSeg('m-type', b.dataset.v); if (!editingId) { mColor = b.dataset.v === '업무' ? 'mint' : 'lav'; renderColors(); } });
     document.querySelectorAll('#m-status button').forEach(b => b.onclick = () => setSeg('m-status', b.dataset.v));
     $('overlay').addEventListener('click', e => { if (e.target === $('overlay')) closeModal(); });
